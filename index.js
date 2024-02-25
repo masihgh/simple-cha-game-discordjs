@@ -38,10 +38,7 @@ for (const file of eventFiles) {
 	}
 }
 
-client.once(Events.ClientReady, readyClient => {
-	console.log(`Ready! Logged in as ${readyClient.user.tag}`);
-});
-
+// EVENT LOADER
 client.on(Events.InteractionCreate, async interaction => {
 	if (!interaction.isChatInputCommand()) return;
 	const command = interaction.client.commands.get(interaction.commandName);

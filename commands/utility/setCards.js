@@ -1,28 +1,28 @@
-const { SlashCommandBuilder, StringSelectMenuBuilder, StringSelectMenuOptionBuilder, ActionRowBuilder } = require('discord.js');
-
-// Assuming you have a predefined array of card packs
+const { StringSelectMenuBuilder, StringSelectMenuOptionBuilder } = require('@discordjs/builders');
+const { SlashCommandBuilder, ActionRowBuilder } = require('discord.js');
+const fs = require('fs'); // Require the 'fs' module to read JSON files
+const path = require('path');
 
 module.exports = {
     data: new SlashCommandBuilder()
         .setName('set')
-        .setDescription('set Game Cards Pack!'),
+        .setDescription('Set Game Cards Pack!'),
     async execute(interaction) {
-        const cardPacks = [
-            { label: 'Pack 1', description: 'The dual-type Grass/Poison Seed Pokémon.', value: 'bulbasaur' },
-            { label: 'A**hole', description: 'The Fire-type Lizard Pokémon.', value: 'charmander' },
-            { label: 'پی شوم', description: 'پک فارسی شده و خنده دار.', value: 'squirtle' },
-        ];
-
+        // Read the card packs from a JSON file
+        const filePath = path.join(__dirname, '../../cah-cards-compact.json');
+        const rawdata = fs.readFileSync(filePath);
+        const cardPacks = JSON.parse(rawdata);
         const selectMenu = new StringSelectMenuBuilder()
             .setCustomId('select-pack')
             .setPlaceholder('Select Card Pack!');
 
-        cardPacks.forEach(option => {
+        Object.keys(cardPacks).forEach(key => {
+            const pack = cardPacks[key];
             selectMenu.addOptions(
                 new StringSelectMenuOptionBuilder()
-                    .setLabel(option.label)
-                    .setDescription(option.description)
-                    .setValue(option.value)
+                    .setLabel(pack.name)
+                    .setDescription(`:white_square_button: Black: ${pack.black.length} / :black_square_button: White: ${pack.white.length}`)
+                    .setValue(key)
             );
         });
 
@@ -33,7 +33,5 @@ module.exports = {
             content: 'Select Card Pack!',
             components: [row],
         });
-
-
     },
 };

@@ -26,21 +26,8 @@ module.exports = {
             );
         });
 
-        console.log(selectMenu);
-        // const selectMenu = new StringSelectMenuBuilder()
-        //     .setCustomId('select-pack')
-        //     .setPlaceholder('Select Card Pack')
-        //     .addOptions(
-        //         cardPacks.map(pack => {
-        //             new StringSelectMenuOptionBuilder()
-        //                 .setLabel(pack)
-        //                 .setDescription(pack + ' Cards Pack.')
-        //                 .setValue(pack.toLowerCase().replace(/\s/g, '_'))
-        //                 .build()
-        //         })
-        //     );
-        // const row = new ActionRowBuilder()
-        //     .addComponents(selectMenu);
+        const row = new ActionRowBuilder()
+            .addComponents(selectMenu);
 
         await interaction.reply({
             content: 'Select Card Pack!',

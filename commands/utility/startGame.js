@@ -1,5 +1,6 @@
 const { SlashCommandBuilder, ButtonBuilder, ActionRowBuilder, ButtonStyle, EmbedBuilder } = require('discord.js');
-const Room = require('../../Models/Room')
+const Room = require('../../Models/Room');
+const { joinEmbed, leaveEmbed, notInGameEmbed, alreadyInGameEmbed } = require('../../embeds/StartGameEmbed');
 
 module.exports = {
     data: new SlashCommandBuilder()
@@ -67,19 +68,9 @@ module.exports = {
                             avatar: user.avatar
                         });
 
-                        const joinEmbed = new EmbedBuilder()
-                            .setColor('#47bd55')
-                            .setTitle(':white_check_mark: Player Joined!')
-                            .setDescription(`@${user.tag} joined the game!`)
-                            .setTimestamp();
-
-                        await interaction.reply({ embeds: [joinEmbed], ephemeral: true });
+                        await interaction.reply({ embeds: [joinEmbsed(user.tag)], ephemeral: true });
                     } else {
                         // Player is already in the game
-                        const alreadyInGameEmbed = new EmbedBuilder()
-                            .setColor('#297ec4')
-                            .setTitle(`:arrow_forward: You are already in the game!`);
-
                         await interaction.reply({ embeds: [alreadyInGameEmbed], ephemeral: true });
                     }
                     break;
@@ -89,20 +80,9 @@ module.exports = {
                     if (index !== -1) {
                         // Remove player from the players array
                         players.splice(index, 1);
-
-                        const leaveEmbed = new EmbedBuilder()
-                            .setColor('#f50036')
-                            .setTitle(':x: Player Left!')
-                            .setDescription(`@${user.tag} left the game.`)
-                            .setTimestamp();
-
-                        await interaction.reply({ embeds: [leaveEmbed], ephemeral: true });
+                        await interaction.reply({ embeds: [leaveEmbed(user.tag)], ephemeral: true });
                     } else {
                         // Player is not in the game
-                        const notInGameEmbed = new EmbedBuilder()
-                            .setColor('#fdd343')
-                            .setTitle(`:warning: You are not in the game!`);
-
                         await interaction.reply({ embeds: [notInGameEmbed], ephemeral: true });
                     }
                     break;

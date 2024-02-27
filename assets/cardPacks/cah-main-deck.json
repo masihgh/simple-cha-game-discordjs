@@ -1,0 +1,169 @@
+{
+    "name": "CAH: Main Deck",
+    "white": [
+        {
+            "text": "A comprehensive understanding of the Irish backstop.",
+            "pack": 5
+        },
+        {
+            "text": "A deep-rooted fear of the working class.",
+            "pack": 5
+        },
+        {
+            "text": "A general lack of purpose.",
+            "pack": 5
+        },
+        {
+            "text": "A Ginsters pasty and three cans of Monsters Energy.",
+            "pack": 5
+        },
+        {
+            "text": "A meat raffle!",
+            "pack": 5
+        },
+        {
+            "text": "A slightly salty toad in the hole.",
+            "pack": 5
+        },
+        {
+            "text": "Ainsley Harriott.",
+            "pack": 5
+        },
+        {
+            "text": "All my gentleman suitors.",
+            "pack": 5
+        },
+        {
+            "text": "Barely making £15,000 a year.",
+            "pack": 5
+        },
+        {
+            "text": "Being a witch.",
+            "pack": 5
+        },
+        {
+            "text": "Being fucking stupid.",
+            "pack": 5
+        },
+        {
+            "text": "Blood, sweat, and tears.",
+            "pack": 5
+        },
+        {
+            "text": "Brutal austerity.",
+            "pack": 5
+        },
+        {
+            "text": "cunninglus",
+            "pack": 5
+        },
+        {
+            "text": "Danny Dyer.",
+            "pack": 5
+        },
+        {
+            "text": "Discovering he's a Tory.",
+            "pack": 5
+        },
+        {
+            "text": "Flat out not giving a shit.",
+            "pack": 5
+        },
+        {
+            "text": "Getting the same Boots Meal Deal every day for six years.",
+            "pack": 5
+        },
+        {
+            "text": "James fucking Cordon.",
+            "pack": 5
+        },
+        {
+            "text": "Licking the Queen.",
+            "pack": 5
+        },
+        {
+            "text": "Martin Lewis, Money Saving Expert.",
+            "pack": 5
+        },
+        {
+            "text": "My Uber driver, Ajay.",
+            "pack": 5
+        },
+        {
+            "text": "Nicki Minaj.",
+            "pack": 5
+        },
+        {
+            "text": "Ryanair.",
+            "pack": 5
+        },
+        {
+            "text": "Scottish independence.",
+            "pack": 5
+        },
+        {
+            "text": "Sitting in a jar of vinegar all night because I am gherkin.",
+            "pack": 5
+        },
+        {
+            "text": "Slapping your knees to signal your imminent departure.",
+            "pack": 5
+        },
+        {
+            "text": "The bastard seagull who stole my chips.",
+            "pack": 5
+        },
+        {
+            "text": "The Hair Plug Club",
+            "pack": 5
+        },
+        {
+            "text": "The petty troubles of the aristrocracy.",
+            "pack": 5
+        },
+        {
+            "text": "The Smell of a Primark.",
+            "pack": 5
+        },
+        {
+            "text": "The Strictly Come Dancing final.",
+            "pack": 5
+        },
+        {
+            "text": "The Welsh.",
+            "pack": 5
+        },
+        {
+            "text": "Waking up half-naked in a Wetherspoons car park.",
+            "pack": 5
+        }
+    ],
+    "black": [
+        {
+            "text": "Channel 4 presents \"_: the Story of _.\"",
+            "pick": 2,
+            "pack": 5
+        },
+        {
+            "text": "Dear Agony Aunt, I'm having some trouble with _ and would like your advice.",
+            "pick": 1,
+            "pack": 5
+        },
+        {
+            "text": "Hey guys, welcome to TGI Fridays! Would you like to start the night off right with _?",
+            "pick": 1,
+            "pack": 5
+        },
+        {
+            "text": "Mate, do not go in that toilet. There's _ in there.",
+            "pick": 1,
+            "pack": 5
+        },
+        {
+            "text": "This season at the Old Vic, Samuel Beckett's classic existential play: Waiting for _.",
+            "pick": 1,
+            "pack": 5
+        }
+    ],
+    "official": true
+}

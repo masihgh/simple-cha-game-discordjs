@@ -1,0 +1,133 @@
+{
+    "name": "Weed Pack",
+    "white": [
+        {
+            "text": "A bong rip so massive it restores justice to the kingdom.",
+            "pack": 1
+        },
+        {
+            "text": "A sandwich with Cheetos in it!",
+            "pack": 1
+        },
+        {
+            "text": "A whole cheese pizza just for me.",
+            "pack": 1
+        },
+        {
+            "text": "An eight-foot man smoking a six-foot bong.",
+            "pack": 1
+        },
+        {
+            "text": "Ancient aliens.",
+            "pack": 1
+        },
+        {
+            "text": "Being too high for airplane.",
+            "pack": 1
+        },
+        {
+            "text": "Cheese crunchies.",
+            "pack": 1
+        },
+        {
+            "text": "Dank ass cancer weed.",
+            "pack": 1
+        },
+        {
+            "text": "Dicking around on the guitar for an hour.",
+            "pack": 1
+        },
+        {
+            "text": "Dropping stuff and knocking everything over.",
+            "pack": 1
+        },
+        {
+            "text": "Eating all the skin off a rotisserie chicken.",
+            "pack": 1
+        },
+        {
+            "text": "Forgetting to breathe and then dying.",
+            "pack": 1
+        },
+        {
+            "text": "Getting high and watching Planet Earth.",
+            "pack": 1
+        },
+        {
+            "text": "Grinning like an idiot.",
+            "pack": 1
+        },
+        {
+            "text": "Hot tub.",
+            "pack": 1
+        },
+        {
+            "text": "How bright the sun is.",
+            "pack": 1
+        },
+        {
+            "text": "Huge popcorn nugs of hairy alien weed.",
+            "pack": 1
+        },
+        {
+            "text": "My own fingers.",
+            "pack": 1
+        },
+        {
+            "text": "Smoking a blunt butt-ass naked.",
+            "pack": 1
+        },
+        {
+            "text": "Smoking a joint with former President Barack Obama.",
+            "pack": 1
+        },
+        {
+            "text": "Snoop Dogg.",
+            "pack": 1
+        },
+        {
+            "text": "The banks, the media, the entire system, man.",
+            "pack": 1
+        },
+        {
+            "text": "Too much edibles.",
+            "pack": 1
+        },
+        {
+            "text": "Unbelievably soft carpet.",
+            "pack": 1
+        },
+        {
+            "text": "Whatever the fuck I was just talking about.",
+            "pack": 1
+        }
+    ],
+    "black": [
+        {
+            "text": "Everyone is staring at you because you're _.",
+            "pick": 1,
+            "pack": 1
+        },
+        {
+            "text": "Hold up. I gotta deal with _, then l'mma smoke this.",
+            "pick": 1,
+            "pack": 1
+        },
+        {
+            "text": "Instead of playing a card this round, everyone must stare the Card Czar while making a sound you'd make after tasting something delicious.",
+            "pick": 1,
+            "pack": 1
+        },
+        {
+            "text": "Okay here's the pitch. James Franco and Seth Rogen are trying to score some weed, and then _ happens.",
+            "pick": 1,
+            "pack": 1
+        },
+        {
+            "text": "You know what's, like, really funny when you think about it? _.",
+            "pick": 1,
+            "pack": 1
+        }
+    ],
+    "official": true
+}

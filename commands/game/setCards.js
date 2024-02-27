@@ -1,6 +1,6 @@
 const { StringSelectMenuBuilder, StringSelectMenuOptionBuilder } = require('@discordjs/builders');
 const { SlashCommandBuilder, ActionRowBuilder } = require('discord.js');
-const fs = require('fs'); // Require the 'fs' module to read JSON files
+const fs = require('fs');
 const path = require('path');
 
 module.exports = {

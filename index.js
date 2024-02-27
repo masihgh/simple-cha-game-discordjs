@@ -1,11 +1,23 @@
 // Require the necessary discord.js classes
 const fs = require('node:fs');
 const path = require('node:path');
+const mongoose = require('mongoose');
 const { Client, Collection, Events, GatewayIntentBits } = require('discord.js');
 const dotenv = require('dotenv');
 dotenv.config();
 
 const client = new Client({ intents: [GatewayIntentBits.Guilds] });
+
+
+main().catch(err => console.log(err));
+
+async function main() {
+  await mongoose.connect(process.env.MONGODB_URI);
+
+  // use `await mongoose.connect('mongodb://user:password@127.0.0.1:27017/test');` if your database has auth enabled
+}
+
+
 
 client.cooldowns = new Collection();
 client.commands = new Collection();
@@ -83,6 +95,8 @@ client.on(Events.InteractionCreate, async interaction => {
 		}
 	}
 });
+
+
 
 // Log in to Discord with your client's token
 client.login(process.env.BOT_TOKEN);

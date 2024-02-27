@@ -32,13 +32,8 @@ function readDecksFromFolder(folderPath) {
 // Function to get a single pack by its file name from the decks read from a folder
 function getSinglePackByFileName(folderPath, targetFileName) {
     const decks = readDecksFromFolder(folderPath);
-
     const targetDeck = decks.find(deck => deck.fileName === targetFileName);
-
-    if (!targetDeck) {
-        console.log(`Deck with file name '${targetFileName}' not found.`);
-        return null;
-    }
+    if (!targetDeck) return null;
 
     return {
         deckName: targetDeck.fileName,

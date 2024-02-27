@@ -38,7 +38,7 @@ module.exports = {
             selectMenu.addOptions(
                 new StringSelectMenuOptionBuilder()
                     .setLabel(pack.data.name)
-                    .setDescription(`Black: ${pack.data.black.length} /  White: ${pack.data.white.length}`)
+                    .setDescription(`▯: ${pack.data.black.length} / ▮: ${pack.data.white.length}${pack.data.description ? ' | ' + pack.data.description : ''}`)
                     .setValue(pack.fileName)
             );
         });

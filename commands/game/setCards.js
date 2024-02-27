@@ -8,21 +8,38 @@ module.exports = {
         .setName('set')
         .setDescription('Set Game Cards Pack!'),
     async execute(interaction) {
+
         // Read the card packs from a JSON file
-        const filePath = path.join(__dirname, '../../cah-cards-compact.json');
-        const rawdata = fs.readFileSync(filePath);
-        const cardPacks = JSON.parse(rawdata);
+        const folderPath = path.join(__dirname, '../../assets/cardPacks');
+        function readDecksFromFolder(folderPath) {
+            const files = fs.readdirSync(folderPath);
+            const jsonFiles = files.filter(file => file.endsWith('.json'));
+            const result = [];
+            jsonFiles.forEach(file => {
+                const filePath = path.join(folderPath, file);
+                const content = fs.readFileSync(filePath, 'utf-8');
+                const data = JSON.parse(content);
+                const fileName = path.parse(file).name;
+                result.push({ fileName, data });
+            });
+
+            return result;
+        }
+
+        const cardPacks = readDecksFromFolder(folderPath);
+
         const selectMenu = new StringSelectMenuBuilder()
             .setCustomId('select-pack')
             .setPlaceholder('Select Card Pack!');
 
         Object.keys(cardPacks).forEach(key => {
             const pack = cardPacks[key];
+            console.log(pack);
             selectMenu.addOptions(
                 new StringSelectMenuOptionBuilder()
-                    .setLabel(pack.name)
-                    .setDescription(`:white_square_button: Black: ${pack.black.length} / :black_square_button: White: ${pack.white.length}`)
-                    .setValue(key)
+                    .setLabel(pack.data.name)
+                    .setDescription(`Black: ${pack.data.black.length} /  White: ${pack.data.white.length}`)
+                    .setValue(pack.fileName)
             );
         });
 

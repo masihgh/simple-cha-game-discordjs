@@ -53,7 +53,7 @@ module.exports = {
         collector.on('collect', async (interaction) => {
             switch (interaction.customId) {
                 case 'join':
-                    if (!players.find(player => player.tag === user.tag)) {
+                    if (!players.find(player => player.id === user.id)) {
                         // Push player information to the players array
                         players.push({
                             id: user.id,
@@ -68,9 +68,8 @@ module.exports = {
                         await interaction.reply({ embeds: [alreadyInGameEmbed], ephemeral: true });
                     }
                     break;
-
                 case 'leave':
-                    const index = players.findIndex(player => player.tag === user.tag);
+                    const index = players.findIndex(player => player.id === user.id);
                     if (index !== -1) {
                         // Remove player from the players array
                         players.splice(index, 1);
@@ -80,13 +79,10 @@ module.exports = {
                         await interaction.reply({ embeds: [notInGameEmbed], ephemeral: true });
                     }
                     break;
-
                 case 'end-game':
                     collector.stop()
                     await interaction.reply({ content: 'dsadasdasds', ephemeral: true });
                     break;
-
-
                 default:
                     break;
             }

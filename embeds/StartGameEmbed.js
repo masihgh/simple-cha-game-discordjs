@@ -17,7 +17,7 @@ const joinEmbed = (userTag) => {
 }
 
 const leaveEmbed = (userTag) => {
-    new EmbedBuilder()
+    return new EmbedBuilder()
         .setColor('#f50036')
         .setTitle(':x: Player Left!')
         .setDescription(`@${userTag} left the game.`)

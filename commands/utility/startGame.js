@@ -1,12 +1,37 @@
 const { SlashCommandBuilder, ButtonBuilder, ActionRowBuilder, ButtonStyle, EmbedBuilder } = require('discord.js');
 const Room = require('../../Models/Room');
 const { joinEmbed, leaveEmbed, notInGameEmbed, alreadyInGameEmbed, StartEmbed, endEmbed, alreadyRomeExist } = require('../../embeds/StartGameEmbed');
+const { getRandomMaterialColor } = require('../../func');
+
+// Function to generate players list embed
+function generatePlayersListEmbed(players, BaseColor) {
+    const embedFields = players.map((player, index) => {
+        const field = {
+            name: `║ ⚇ Player ${index + 1}`,
+            value: `║ **Username:** ${player.username}`,   
+            inline: true
+        };
+
+        return field;
+    });
+
+    const Embed = new EmbedBuilder()
+        .setColor(BaseColor)
+        .setTitle("Players Information")
+        .setDescription(`*players:* [**${players.length}**]`)
+        .addFields(embedFields)
+    
+    // if(players.length > 0) Embed.setFooter({ text: `Last Player: @${players[players.length - 1].username}`, iconURL: players[players.length - 1].avatar !== null ? `https://cdn.discordapp.com/avatars/${players[players.length - 1].id}/${players[players.length - 1].avatar}.webp?size=48` : undefined });
+    return Embed
+}
+
 
 module.exports = {
     data: new SlashCommandBuilder()
         .setName('new')
         .setDescription('Start a new Game!'),
     async execute(interaction) {
+        let BaseColor = getRandomMaterialColor()
         const { user, channelId, guildId } = interaction
 
         // Check if a room with the same ID already exists
@@ -44,8 +69,8 @@ module.exports = {
         const row = new ActionRowBuilder()
             .addComponents(joinButton, leaveButton, endButton);
 
-        await interaction.reply({
-            embeds: [StartEmbed],
+        const playersListMessage = await interaction.reply({
+            embeds: [StartEmbed(user,BaseColor), generatePlayersListEmbed(players, BaseColor)],
             components: [row],
         });
 
@@ -54,27 +79,27 @@ module.exports = {
         collector.on('collect', async (interaction) => {
             switch (interaction.customId) {
                 case 'join':
-                    if (!players.find(player => player.id === user.id)) {
+                    if (!players.find(player => player.id === interaction.user.id)) {
                         // Push player information to the players array
                         players.push({
-                            id: user.id,
-                            username: user.username,
-                            globalName: user.globalName,
-                            avatar: user.avatar
+                            id: interaction.user.id,
+                            username: interaction.user.username,
+                            globalName: interaction.user.globalName,
+                            avatar: interaction.user.avatar
                         });
 
-                        await interaction.reply({ embeds: [joinEmbed(user.tag)], ephemeral: true });
+                        await interaction.reply({ embeds: [joinEmbed(interaction.user.tag)], ephemeral: true });
                     } else {
                         // Player is already in the game
                         await interaction.reply({ embeds: [alreadyInGameEmbed], ephemeral: true });
                     }
                     break;
                 case 'leave':
-                    const index = players.findIndex(player => player.id === user.id);
+                    const index = players.findIndex(player => player.id === interaction.user.id);
                     if (index !== -1) {
                         // Remove player from the players array
                         players.splice(index, 1);
-                        await interaction.reply({ embeds: [leaveEmbed(user.tag)], ephemeral: true });
+                        await interaction.reply({ embeds: [leaveEmbed(interaction.user.tag)], ephemeral: true });
                     } else {
                         // Player is not in the game
                         await interaction.reply({ embeds: [notInGameEmbed], ephemeral: true });
@@ -90,6 +115,12 @@ module.exports = {
                 default:
                     break;
             }
+
+            // Update players list message
+            await playersListMessage.edit({
+                embeds: [StartEmbed(user,BaseColor), generatePlayersListEmbed(players, BaseColor)],
+            });
+
             await RoomLive.save();
 
         });

@@ -1,12 +1,13 @@
 const { EmbedBuilder } = require("discord.js");
 
-
-const StartEmbed = new EmbedBuilder()
-    .setColor('#ffffff')
-    .setTitle('Game Created! Waiting Room...')
-    .setDescription('Game Created Successfuly')
-    .setFooter({ text: 'Waiting for players join...', iconURL: 'https://i.imgur.com/AfFp7pu.png' });
-
+const StartEmbed = (user,color) => {
+    console.log(user);
+    return new EmbedBuilder()
+        .setColor(color)
+        .setTitle('Game Created! Waiting Room...')
+        .setDescription('Game Created Successfuly')
+        .setFooter({ text: `Created By @${user.username}`, iconURL: user.avatar !== null ? `https://cdn.discordapp.com/avatars/${user.id}/${user.avatar}.webp?size=48` : undefined });
+}
 
 const joinEmbed = (userTag) => {
     return new EmbedBuilder()

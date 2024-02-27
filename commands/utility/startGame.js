@@ -1,6 +1,6 @@
 const { SlashCommandBuilder, ButtonBuilder, ActionRowBuilder, ButtonStyle, EmbedBuilder } = require('discord.js');
 const Room = require('../../Models/Room');
-const { joinEmbed, leaveEmbed, notInGameEmbed, alreadyInGameEmbed, StartEmbed, endEmbed } = require('../../embeds/StartGameEmbed');
+const { joinEmbed, leaveEmbed, notInGameEmbed, alreadyInGameEmbed, StartEmbed, endEmbed, alreadyRomeExist } = require('../../embeds/StartGameEmbed');
 
 module.exports = {
     data: new SlashCommandBuilder()
@@ -12,16 +12,17 @@ module.exports = {
         // Check if a room with the same ID already exists
         let RoomLive = await Room.findOne({ guild_id: guildId, channel_id: channelId });
 
-        if (!RoomLive) {
-            // Create a new room if it doesn't exist
-            RoomLive = new Room({
-                guild_id: guildId,
-                channel_id: channelId,
-                owner_id: user.id,
-                players: []  // Add a players array to store player information
-            });
-            await RoomLive.save();
+        if (RoomLive) {
+            return interaction.reply({ embeds: [alreadyRomeExist], ephemeral: true });
         }
+    
+        RoomLive = new Room({
+            guild_id: guildId,
+            channel_id: channelId,
+            owner_id: user.id,
+            players: []  // Add a players array to store player information
+        });
+        await RoomLive.save();
 
         const players = RoomLive.players; // Use the players array from RoomLive
 

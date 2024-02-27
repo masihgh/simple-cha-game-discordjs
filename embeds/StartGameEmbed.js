@@ -29,6 +29,11 @@ const notInGameEmbed = new EmbedBuilder()
     .setTitle(`:warning: You are not in the game!`);
 
 
+const alreadyRomeExist = new EmbedBuilder()
+    .setColor('#fdd343')
+    .setTitle(`:warning: A room already exists in this channel!`);
+
+
 const alreadyInGameEmbed = new EmbedBuilder()
     .setColor('#297ec4')
     .setTitle(`:arrow_forward: You are already in the game!`);
@@ -45,6 +50,7 @@ module.exports = {
     notInGameEmbed,
     alreadyInGameEmbed,
     StartEmbed,
+    alreadyRomeExist,
     endEmbed
 }
 

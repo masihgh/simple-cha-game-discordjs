@@ -1,11 +1,28 @@
 const { SlashCommandBuilder, ButtonBuilder, ActionRowBuilder, ButtonStyle, EmbedBuilder } = require('discord.js');
+const Room = require('../../Models/Room')
 
 module.exports = {
     data: new SlashCommandBuilder()
-        .setName('start')
+        .setName('new')
         .setDescription('Start a new Game!'),
     async execute(interaction) {
-        const players = [];
+        const { user, channelId, guildId } = interaction
+
+        // Check if a room with the same ID already exists
+        let RoomLive = await Room.findOne({ guild_id: guildId, channel_id: channelId });
+
+        if (!RoomLive) {
+            // Create a new room if it doesn't exist
+            RoomLive = new Room({
+                guild_id: guildId,
+                channel_id: channelId,
+                owner_id: user.id,
+                players: []  // Add a players array to store player information
+            });
+            await RoomLive.save();
+        }
+
+        const players = RoomLive.players; // Use the players array from RoomLive
 
         const joinButton = new ButtonBuilder()
             .setCustomId('join')
@@ -41,43 +58,50 @@ module.exports = {
         collector.on('collect', async (interaction) => {
             switch (interaction.customId) {
                 case 'join':
-                    if (!players.includes(interaction.user.tag)) {
-                        players.push(interaction.user.tag);
+                    if (!players.find(player => player.tag === user.tag)) {
+                        // Push player information to the players array
+                        players.push({
+                            id: user.id,
+                            username: user.username,
+                            globalName: user.globalName,
+                            avatar: user.avatar
+                        });
+
                         const joinEmbed = new EmbedBuilder()
                             .setColor('#47bd55')
-                            .setTitle(':white_check_mark:  Player Joined!')
-                            .setDescription(`@${interaction.user.tag} joined the game!`)
+                            .setTitle(':white_check_mark: Player Joined!')
+                            .setDescription(`@${user.tag} joined the game!`)
                             .setTimestamp();
 
-                        await interaction.reply({ embeds: [joinEmbed] });
+                        await interaction.reply({ embeds: [joinEmbed], ephemeral: true });
                     } else {
                         // Player is already in the game
                         const alreadyInGameEmbed = new EmbedBuilder()
                             .setColor('#297ec4')
-                            .setTitle(`:arrow_forward:  You are already in the game!`);
+                            .setTitle(`:arrow_forward: You are already in the game!`);
 
                         await interaction.reply({ embeds: [alreadyInGameEmbed], ephemeral: true });
                     }
                     break;
 
                 case 'leave':
-                    if (players.includes(interaction.user.tag)) {
+                    const index = players.findIndex(player => player.tag === user.tag);
+                    if (index !== -1) {
+                        // Remove player from the players array
+                        players.splice(index, 1);
+
                         const leaveEmbed = new EmbedBuilder()
                             .setColor('#f50036')
-                            .setTitle(':x:  Player Left!')
-                            .setDescription(`@${interaction.user.tag} left the game.`)
+                            .setTitle(':x: Player Left!')
+                            .setDescription(`@${user.tag} left the game.`)
                             .setTimestamp();
 
-                        await interaction.reply({ embeds: [leaveEmbed] });
-                        const index = players.indexOf(interaction.user.tag);
-                        if (index !== -1) {
-                            players.splice(index, 1);
-                        }
+                        await interaction.reply({ embeds: [leaveEmbed], ephemeral: true });
                     } else {
                         // Player is not in the game
                         const notInGameEmbed = new EmbedBuilder()
                             .setColor('#fdd343')
-                            .setTitle(`:warning:  You are not in the game!`);
+                            .setTitle(`:warning: You are not in the game!`);
 
                         await interaction.reply({ embeds: [notInGameEmbed], ephemeral: true });
                     }
@@ -85,18 +109,22 @@ module.exports = {
 
                 case 'end-game':
                     collector.stop()
-                    await interaction.reply({ content:'dsadasdasds', ephemeral: true });
+                    await interaction.reply({ content: 'dsadasdasds', ephemeral: true });
                     break;
 
 
                 default:
                     break;
             }
-
+            await RoomLive.save();
 
         });
 
         collector.on('end', async () => {
+            // Update RoomLive with the modified players array
+            // Delete the room when the game ends
+            await Room.findOneAndDelete({ guild_id: guildId, channel_id: channelId });
+
             const endEmbed = new EmbedBuilder()
                 .setColor('#f50036')
                 .setTitle('Game Ended!')

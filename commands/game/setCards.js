@@ -24,7 +24,6 @@ module.exports = {
             selectMenu.addOptions(
                 new StringSelectMenuOptionBuilder()
                     .setLabel(pack.data.name)
-                    .setEmoji('')
                     .setDescription(`▯: ${pack.data.black.length} / ▮: ${pack.data.white.length}${pack.data.description ? ' | ' + pack.data.description : ''}`)
                     .setValue(pack.fileName)
             );
@@ -55,7 +54,7 @@ module.exports = {
                 );
 
                 console.log(`Selected pack '${selectedPack}' saved for guild '${guildId}'`);
-                await interaction.followUp(`Card Pack Selected to ${selectedPack}.`);
+                await interaction.followUp(`Card Pack Selected to **${selectedPack}**.`);
 
             } catch (error) {
                 console.error('Error updating MongoDB:', error);

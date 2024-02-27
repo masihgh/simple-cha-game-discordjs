@@ -1,3 +1,6 @@
+const fs = require('fs');
+const path = require('path');
+
 // Material Design color palette array
 const materialColors = [
     '#F44336', '#E91E63', '#9C27B0', '#673AB7', '#3F51B5',
@@ -45,5 +48,5 @@ function getSinglePackByFileName(folderPath, targetFileName) {
 module.exports = {
     getRandomMaterialColor,
     readDecksFromFolder,
-    getSinglePackFromFolder
+    getSinglePackByFileName
 }

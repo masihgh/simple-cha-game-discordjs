@@ -62,7 +62,7 @@ module.exports = {
                             avatar: user.avatar
                         });
 
-                        await interaction.reply({ embeds: [joinEmbsed(user.tag)], ephemeral: true });
+                        await interaction.reply({ embeds: [joinEmbed(user.tag)], ephemeral: true });
                     } else {
                         // Player is already in the game
                         await interaction.reply({ embeds: [alreadyInGameEmbed], ephemeral: true });

@@ -29,25 +29,24 @@ function readDecksFromFolder(folderPath) {
     return result;
 }
 
-// Function to get a single pack from the decks read from a folder
-function getSinglePackFromFolder(folderPath) {
+// Function to get a single pack by its file name from the decks read from a folder
+function getSinglePackByFileName(folderPath, targetFileName) {
     const decks = readDecksFromFolder(folderPath);
 
-    if (decks.length === 0) {
-        console.log('No decks found in the folder.');
+    const targetDeck = decks.find(deck => deck.fileName === targetFileName);
+
+    if (!targetDeck) {
+        console.log(`Deck with file name '${targetFileName}' not found.`);
         return null;
     }
 
-    const randomIndex = Math.floor(Math.random() * decks.length);
-    const randomDeck = decks[randomIndex];
-
     return {
-        deckName: randomDeck.fileName,
-        isVIP: randomDeck.isVIP,
-        data: randomDeck.data,
+        deckName: targetDeck.fileName,
+        isVIP: targetDeck.isVIP,
+        data: targetDeck.data,
+        color: getRandomMaterialColor()
     };
 }
-
 
 module.exports = {
     getRandomMaterialColor,

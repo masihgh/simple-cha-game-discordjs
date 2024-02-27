@@ -9,7 +9,7 @@ module.exports = {
 		await interaction.reply('Pinging...').then(sentMessage => {
 			const endTime = Date.now();
 			const latency = endTime - startTime;
-			sentMessage.edit(`Pong! Latency is ${latency}ms. API Latency is ${Math.round(interaction.client.ws.ping)}ms.`);
+			sentMessage.edit(`**Pong!**\n **Latency is: ** ${latency}ms\n **API Latency is: ** ${Math.round(interaction.client.ws.ping)}ms`);
 		});
 	},
 };

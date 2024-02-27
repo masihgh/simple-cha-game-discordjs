@@ -1,14 +1,15 @@
 {
-  "name": "game-discord",
-  "version": "1.0.0",
-  "description": "",
+  "name": "simple-cha-game-discordjs",
+  "version": "0.0.1",
+  "description": "Explore the Simple Cards Against Humanity® Game on Discord! This project uses MongoDB, Node.js, JavaScript, and Discord.js to bring the popular party game to your server. Have a blast with friends and community members, filling in blanks to complete outrageous sentences.",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "run": "node deploy-commands.js && npm run index.js",
+    "dev": "node deploy-commands.js && nodemon index.js"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "keywords": ["nodejs", "javascript", "game", "mongodb", "discord-bot", "discord-js", "cah"],
+  "author": "Masih Ghaznavi",
+  "license": "MIT",
   "dependencies": {
     "discord.js": "^14.14.1",
     "dotenv": "^16.4.5",

@@ -15,7 +15,7 @@ module.exports = {
         if (RoomLive) {
             return interaction.reply({ embeds: [alreadyRomeExist], ephemeral: true });
         }
-    
+
         RoomLive = new Room({
             guild_id: guildId,
             channel_id: channelId,
@@ -81,8 +81,11 @@ module.exports = {
                     }
                     break;
                 case 'end-game':
-                    collector.stop()
-                    await interaction.reply({ content: 'dsadasdasds', ephemeral: true });
+                    if (RoomLive.owner_id === user.id) {
+                        collector.stop()
+                    } else {
+                        await interaction.reply({ content: 'Only owner of room can stop waiting mode!', ephemeral: true });
+                    }
                     break;
                 default:
                     break;
@@ -92,8 +95,6 @@ module.exports = {
         });
 
         collector.on('end', async () => {
-            // Update RoomLive with the modified players array
-            // Delete the room when the game ends
             await Room.findOneAndDelete({ guild_id: guildId, channel_id: channelId });
             await interaction.followUp({ embeds: [endEmbed], components: [] });
         });

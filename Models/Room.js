@@ -1,9 +1,9 @@
 const mongoose = require("mongoose");
 
 const RoomSchema = new mongoose.Schema({
-    guild_id: Number,
-    channel_id: Number,
-    owner_id: Number,
+    guild_id: String,
+    channel_id: String,
+    owner_id: String,
     players: [],
     name: String,
     created_at: { type: Date, default: Date.now },

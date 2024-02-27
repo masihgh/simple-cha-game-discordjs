@@ -3,7 +3,7 @@ const { EmbedBuilder } = require("discord.js");
 
 const StartEmbed = new EmbedBuilder()
     .setColor('#ffffff')
-    .setTitle('Game Created!')
+    .setTitle('Game Created! Waiting Room...')
     .setDescription('Game Created Successfuly')
     .setFooter({ text: 'Waiting for players join...', iconURL: 'https://i.imgur.com/AfFp7pu.png' });
 

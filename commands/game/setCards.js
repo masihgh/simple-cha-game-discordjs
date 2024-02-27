@@ -21,14 +21,15 @@ module.exports = {
                 const content = fs.readFileSync(filePath, 'utf-8');
                 const data = JSON.parse(content);
                 const fileName = path.parse(file).name;
-                result.push({ fileName, data });
+                const isVIP = fileName.endsWith('-vip');
+                result.push({ fileName,isVIP, data });
             });
 
             return result;
         }
 
         const cardPacks = readDecksFromFolder(folderPath);
-
+        console.log(cardPacks);
         const selectMenu = new StringSelectMenuBuilder()
             .setCustomId('select-pack')
             .setPlaceholder('Select Card Pack!');
@@ -39,6 +40,7 @@ module.exports = {
             selectMenu.addOptions(
                 new StringSelectMenuOptionBuilder()
                     .setLabel(pack.data.name)
+                    .setEmoji('')
                     .setDescription(`▯: ${pack.data.black.length} / ▮: ${pack.data.white.length}${pack.data.description ? ' | ' + pack.data.description : ''}`)
                     .setValue(pack.fileName)
             );
@@ -69,8 +71,11 @@ module.exports = {
                 );
 
                 console.log(`Selected pack '${selectedPack}' saved for guild '${guildId}'`);
+                await interaction.followUp(`Card Pack Selected to ${selectedPack}.`);
+
             } catch (error) {
                 console.error('Error updating MongoDB:', error);
+                await interaction.followUp(`Error Selected CardPack. Call Developer`);
             }
 
             await i.deferUpdate();

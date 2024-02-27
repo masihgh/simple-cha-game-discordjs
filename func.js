@@ -12,6 +12,24 @@ const getRandomMaterialColor = () => {
     return materialColors[randomIndex];
 }
 
+// Read the card packs from a JSON file
+function readDecksFromFolder(folderPath) {
+    const files = fs.readdirSync(folderPath);
+    const jsonFiles = files.filter(file => file.endsWith('.json'));
+    const result = [];
+    jsonFiles.forEach(file => {
+        const filePath = path.join(folderPath, file);
+        const content = fs.readFileSync(filePath, 'utf-8');
+        const data = JSON.parse(content);
+        const fileName = path.parse(file).name;
+        const isVIP = fileName.endsWith('-vip');
+        result.push({ fileName,isVIP, data });
+    });
+
+    return result;
+}
+
 module.exports = {
-    getRandomMaterialColor
+    getRandomMaterialColor,
+    readDecksFromFolder
 }

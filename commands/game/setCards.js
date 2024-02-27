@@ -3,6 +3,7 @@ const { SlashCommandBuilder, ActionRowBuilder } = require('discord.js');
 const fs = require('fs');
 const path = require('path');
 const GuildSetting = require('../../Models/GuildSetting');
+const { readDecksFromFolder } = require('../../func');
 
 module.exports = {
     data: new SlashCommandBuilder()
@@ -12,24 +13,7 @@ module.exports = {
 
         // Read the card packs from a JSON file
         const folderPath = path.join(__dirname, '../../assets/cardPacks');
-        function readDecksFromFolder(folderPath) {
-            const files = fs.readdirSync(folderPath);
-            const jsonFiles = files.filter(file => file.endsWith('.json'));
-            const result = [];
-            jsonFiles.forEach(file => {
-                const filePath = path.join(folderPath, file);
-                const content = fs.readFileSync(filePath, 'utf-8');
-                const data = JSON.parse(content);
-                const fileName = path.parse(file).name;
-                const isVIP = fileName.endsWith('-vip');
-                result.push({ fileName,isVIP, data });
-            });
-
-            return result;
-        }
-
         const cardPacks = readDecksFromFolder(folderPath);
-        console.log(cardPacks);
         const selectMenu = new StringSelectMenuBuilder()
             .setCustomId('select-pack')
             .setPlaceholder('Select Card Pack!');

@@ -33,10 +33,18 @@ const alreadyInGameEmbed = new EmbedBuilder()
     .setColor('#297ec4')
     .setTitle(`:arrow_forward: You are already in the game!`);
 
+const endEmbed = new EmbedBuilder()
+    .setColor('#f50036')
+    .setTitle('Game Ended!')
+    .setDescription('The game has ended.')
+    .setTimestamp();
+
 module.exports = {
     joinEmbed,
     leaveEmbed,
     notInGameEmbed,
     alreadyInGameEmbed,
-    StartEmbed
+    StartEmbed,
+    endEmbed
 }
+

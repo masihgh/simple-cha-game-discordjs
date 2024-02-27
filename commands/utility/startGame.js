@@ -1,6 +1,6 @@
 const { SlashCommandBuilder, ButtonBuilder, ActionRowBuilder, ButtonStyle, EmbedBuilder } = require('discord.js');
 const Room = require('../../Models/Room');
-const { joinEmbed, leaveEmbed, notInGameEmbed, alreadyInGameEmbed, StartEmbed } = require('../../embeds/StartGameEmbed');
+const { joinEmbed, leaveEmbed, notInGameEmbed, alreadyInGameEmbed, StartEmbed, endEmbed } = require('../../embeds/StartGameEmbed');
 
 module.exports = {
     data: new SlashCommandBuilder()
@@ -94,13 +94,6 @@ module.exports = {
             // Update RoomLive with the modified players array
             // Delete the room when the game ends
             await Room.findOneAndDelete({ guild_id: guildId, channel_id: channelId });
-
-            const endEmbed = new EmbedBuilder()
-                .setColor('#f50036')
-                .setTitle('Game Ended!')
-                .setDescription('The game has ended.')
-                .setTimestamp();
-
             await interaction.followUp({ embeds: [endEmbed], components: [] });
         });
     },

@@ -2,6 +2,7 @@ const { SlashCommandBuilder, ButtonBuilder, ActionRowBuilder, ButtonStyle, Embed
 const Room = require('../../Models/Room');
 const { joinEmbed, leaveEmbed, notInGameEmbed, alreadyInGameEmbed, StartEmbed, endEmbed, alreadyRomeExist } = require('../../embeds/StartGameEmbed');
 const { getRandomMaterialColor } = require('../../func');
+const ActiveRoom = require('../../Models/ActiveRoom');
 
 // Function to generate players list embed
 function generatePlayersListEmbed(players, BaseColor) {
@@ -126,7 +127,21 @@ module.exports = {
         });
 
         collector.on('end', async () => {
-            await Room.findOneAndDelete({ guild_id: guildId, channel_id: channelId });
+            let existingActiveRoom = await ActiveRoom.findOne({ guild_id: guildId, channel_id: channelId });
+            // TODO: player check
+            if (existingActiveRoom) {
+                existingActiveRoom.players = players;
+                await existingActiveRoom.save();
+            } else {
+                const PlayRoom = new ActiveRoom({
+                    guild_id: guildId,
+                    channel_id: channelId,
+                    owner_id: user.id,
+                    players: players
+                });
+                await PlayRoom.save();
+            }
+
             await interaction.followUp({ embeds: [endEmbed], components: [] });
         });
     },

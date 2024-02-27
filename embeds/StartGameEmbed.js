@@ -1,7 +1,6 @@
 const { EmbedBuilder } = require("discord.js");
 
 const StartEmbed = (user,color) => {
-    console.log(user);
     return new EmbedBuilder()
         .setColor(color)
         .setTitle('Game Created! Waiting Room...')

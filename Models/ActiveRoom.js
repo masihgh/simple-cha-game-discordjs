@@ -6,6 +6,7 @@ const ActiveRoomSchema = new mongoose.Schema({
     owner_id: String,
     players: [],
     name: String,
+    game_rounds: {type: Number, default: 10},
     created_at: { type: Date, default: Date.now },
     game_ended: Date
 });

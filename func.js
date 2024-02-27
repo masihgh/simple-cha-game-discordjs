@@ -29,7 +29,28 @@ function readDecksFromFolder(folderPath) {
     return result;
 }
 
+// Function to get a single pack from the decks read from a folder
+function getSinglePackFromFolder(folderPath) {
+    const decks = readDecksFromFolder(folderPath);
+
+    if (decks.length === 0) {
+        console.log('No decks found in the folder.');
+        return null;
+    }
+
+    const randomIndex = Math.floor(Math.random() * decks.length);
+    const randomDeck = decks[randomIndex];
+
+    return {
+        deckName: randomDeck.fileName,
+        isVIP: randomDeck.isVIP,
+        data: randomDeck.data,
+    };
+}
+
+
 module.exports = {
     getRandomMaterialColor,
-    readDecksFromFolder
+    readDecksFromFolder,
+    getSinglePackFromFolder
 }

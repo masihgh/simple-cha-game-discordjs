@@ -44,7 +44,6 @@ function getSinglePackByFileName(folderPath, targetFileName) {
         deckName: targetDeck.fileName,
         isVIP: targetDeck.isVIP,
         data: targetDeck.data,
-        color: getRandomMaterialColor()
     };
 }
 

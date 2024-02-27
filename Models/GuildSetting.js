@@ -5,6 +5,6 @@ const GuildSettingSchema = new mongoose.Schema({
     packSelected: String,
 });
 
-const GuildSetting = mongoose.model('Rooms', GuildSettingSchema);
+const GuildSetting = mongoose.model('GuildSetting', GuildSettingSchema);
 
 module.exports = GuildSetting;

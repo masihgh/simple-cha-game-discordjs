@@ -1,5 +1,13 @@
 const { EmbedBuilder } = require("discord.js");
 
+
+const StartEmbed = new EmbedBuilder()
+    .setColor('#ffffff')
+    .setTitle('Game Created!')
+    .setDescription('Game Created Successfuly')
+    .setFooter({ text: 'Waiting for players join...', iconURL: 'https://i.imgur.com/AfFp7pu.png' });
+
+
 const joinEmbed = (userTag) => {
     return new EmbedBuilder()
         .setColor('#47bd55')
@@ -29,5 +37,6 @@ module.exports = {
     joinEmbed,
     leaveEmbed,
     notInGameEmbed,
-    alreadyInGameEmbed
+    alreadyInGameEmbed,
+    StartEmbed
 }

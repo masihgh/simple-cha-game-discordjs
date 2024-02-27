@@ -1,6 +1,6 @@
 const { SlashCommandBuilder, ButtonBuilder, ActionRowBuilder, ButtonStyle, EmbedBuilder } = require('discord.js');
 const Room = require('../../Models/Room');
-const { joinEmbed, leaveEmbed, notInGameEmbed, alreadyInGameEmbed } = require('../../embeds/StartGameEmbed');
+const { joinEmbed, leaveEmbed, notInGameEmbed, alreadyInGameEmbed, StartEmbed } = require('../../embeds/StartGameEmbed');
 
 module.exports = {
     data: new SlashCommandBuilder()
@@ -42,12 +42,6 @@ module.exports = {
 
         const row = new ActionRowBuilder()
             .addComponents(joinButton, leaveButton, endButton);
-
-        const StartEmbed = new EmbedBuilder()
-            .setColor('#ffffff')
-            .setTitle('Game Created!')
-            .setDescription('Game Created Successfuly')
-            .setFooter({ text: 'Waiting for players join...', iconURL: 'https://i.imgur.com/AfFp7pu.png' });
 
         await interaction.reply({
             embeds: [StartEmbed],

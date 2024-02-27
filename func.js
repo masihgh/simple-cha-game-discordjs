@@ -45,5 +45,5 @@ function getSinglePackByFileName(folderPath, targetFileName) {
 module.exports = {
     getRandomMaterialColor,
     readDecksFromFolder,
-    getSinglePackFromFolder
+    getSinglePackByFileName
 }
